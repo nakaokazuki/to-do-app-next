@@ -1,23 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <title>To do を編集</title>
+  <link rel="stylesheet" href="{% static 'tasks/style.css' %}" />
 </head>
-<body>
+<body class="page">
   <h1>To do を編集</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    {% for field in form %}
-      <div>
-        {{ field.label_tag }}
-        {{ field }}
-        {{ field.errors }}
-      </div>
-    {% endfor %}
-    <button type="submit">保存</button>
-  </form>
   <p><a href="{% url 'task_list' %}">一覧へ戻る</a></p>
+  <section class="form-stack">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        <div>
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn">保存</button>
+    </form>
+  </section>
 </body>
 </html>

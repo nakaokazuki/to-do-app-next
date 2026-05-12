@@ -1,10 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <title>{{ task.title }} - 詳細</title>
+  <link rel="stylesheet" href="{% static 'tasks/style.css' %}" />
 </head>
-<body>
+<body class="page">
   <h1>{{ task.title }}</h1>
   <p><a href="{% url 'task_list' %}">一覧へ戻る</a>
      | <a href="{% url 'task_edit' task.pk %}">編集</a></p>

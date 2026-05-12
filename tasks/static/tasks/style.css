@@ -1,0 +1,138 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: #f5f6f8;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+}
+
+h2 {
+  margin: 24px 0 12px;
+  font-size: 1.1rem;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.form-stack > div {
+  margin-bottom: 12px;
+}
+
+.form-stack label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.form-stack input[type="text"],
+.form-stack input[type="datetime-local"],
+.form-stack textarea {
+  width: 100%;
+  max-width: 520px;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.form-stack .errorlist {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e1;
+}
+
+.btn-danger {
+  background: #dc2626;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.actions a {
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.meta {
+  color: #64748b;
+  font-size: 0.875rem;
+}
