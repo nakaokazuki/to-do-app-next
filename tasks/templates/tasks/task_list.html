@@ -8,13 +8,21 @@
   <h1>ToDoリスト</h1>
   <form method="post">
     {% csrf_token %}
-    <input type="text" name="title" placeholder="やることを入力" />
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <div>
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+      </div>
+    {% endfor %}
     <button type="submit">追加</button>
   </form>
   <ul>
     {% for task in tasks %}
       <li>
         {% if task.is_completed %}<s>{{ task.title }}</s>{% else %}{{ task.title }}{% endif %}
+        <a href="{% url 'task_edit' task.pk %}">編集</a>
         <a href="{% url 'toggle_task' task.pk %}">完了切替</a>
         <a href="{% url 'delete_task' task.pk %}">削除</a>
       </li>
