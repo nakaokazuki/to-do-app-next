@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>To do を追加</title>
+  <link rel="stylesheet" href="{% static 'tasks/style.css' %}" />
+</head>
+<body class="page">
+  <h1>To do を追加</h1>
+  <p><a href="{% url 'task_list' %}">一覧へ戻る</a></p>
+  <section class="form-stack">
+    <form method="post" action="{% url 'task_create' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        <div>
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn">追加</button>
+    </form>
+  </section>
+</body>
+</html>

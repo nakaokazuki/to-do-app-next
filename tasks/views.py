@@ -5,6 +5,11 @@ from .models import Task
 
 
 def task_list(request):
+    tasks = Task.objects.order_by("-created_at")
+    return render(request, "tasks/task_list.html", {"tasks": tasks})
+
+
+def task_create(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -13,12 +18,7 @@ def task_list(request):
     else:
         form = TaskForm()
 
-    tasks = Task.objects.order_by("-created_at")
-    return render(
-        request,
-        "tasks/task_list.html",
-        {"tasks": tasks, "form": form},
-    )
+    return render(request, "tasks/task_create.html", {"form": form})
 
 
 def toggle_task(request, pk):
@@ -49,6 +49,7 @@ def task_edit(request, pk):
         "tasks/task_form.html",
         {"form": form, "task": task},
     )
+
 
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
