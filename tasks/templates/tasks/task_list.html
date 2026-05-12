@@ -6,7 +6,9 @@
 </head>
 <body>
   <h1>ToDoリスト</h1>
-  <form method="post">
+
+  <h2>新規追加</h2>
+  <form method="post" action="{% url 'task_list' %}">
     {% csrf_token %}
     {{ form.non_field_errors }}
     {% for field in form %}
@@ -18,17 +20,44 @@
     {% endfor %}
     <button type="submit">追加</button>
   </form>
-  <ul>
-    {% for task in tasks %}
-      <li>
-        {% if task.is_completed %}<s>{{ task.title }}</s>{% else %}{{ task.title }}{% endif %}
-        <a href="{% url 'task_edit' task.pk %}">編集</a>
-        <a href="{% url 'toggle_task' task.pk %}">完了切替</a>
-        <a href="{% url 'delete_task' task.pk %}">削除</a>
-      </li>
-    {% empty %}
-      <li>タスクはまだありません</li>
-    {% endfor %}
-  </ul>
+
+  <h2>一覧</h2>
+  <form method="post" action="{% url 'task_bulk_delete' %}">
+    {% csrf_token %}
+    <table border="1" cellpadding="6">
+      <thead>
+        <tr>
+          <th>選択</th>
+          <th>To do</th>
+          <th>日時</th>
+          <th>場所</th>
+          <th>更新日時</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td><input type="checkbox" name="task_ids" value="{{ task.pk }}" /></td>
+            <td>
+              {% if task.is_completed %}<s>{{ task.title }}</s>{% else %}{{ task.title }}{% endif %}
+            </td>
+            <td>{{ task.scheduled_at|default:"-" }}</td>
+            <td>{{ task.location|default:"-" }}</td>
+            <td>{{ task.updated_at }}</td>
+            <td>
+              <a href="{% url 'task_detail' task.pk %}">詳細</a>
+              <a href="{% url 'task_edit' task.pk %}">編集</a>
+              <a href="{% url 'toggle_task' task.pk %}">完了切替</a>
+              <a href="{% url 'delete_task' task.pk %}">削除</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="6">タスクはまだありません</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p><button type="submit">選択した項目を削除</button></p>
+  </form>
 </body>
 </html>

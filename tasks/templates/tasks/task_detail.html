@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ task.title }} - 詳細</title>
+</head>
+<body>
+  <h1>{{ task.title }}</h1>
+  <p><a href="{% url 'task_list' %}">一覧へ戻る</a>
+     | <a href="{% url 'task_edit' task.pk %}">編集</a></p>
+
+  <dl>
+    <dt>日時</dt>
+    <dd>{{ task.scheduled_at|default:"-" }}</dd>
+    <dt>場所</dt>
+    <dd>{{ task.location|default:"-" }}</dd>
+    <dt>注意事項</dt>
+    <dd>{{ task.caution|default:"-"|linebreaksbr }}</dd>
+    <dt>準備が必要なもの</dt>
+    <dd>{{ task.preparation|default:"-"|linebreaksbr }}</dd>
+    <dt>詳細</dt>
+    <dd>{{ task.detail|default:"-"|linebreaksbr }}</dd>
+    <dt>作成日時</dt>
+    <dd>{{ task.created_at }}</dd>
+    <dt>更新日時</dt>
+    <dd>{{ task.updated_at }}</dd>
+    <dt>完了</dt>
+    <dd>{% if task.is_completed %}はい{% else %}いいえ{% endif %}</dd>
+  </dl>
+</body>
+</html>

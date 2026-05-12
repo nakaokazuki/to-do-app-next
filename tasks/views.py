@@ -49,3 +49,15 @@ def task_edit(request, pk):
         "tasks/task_form.html",
         {"form": form, "task": task},
     )
+
+def task_detail(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, "tasks/task_detail.html", {"task": task})
+
+
+def task_bulk_delete(request):
+    if request.method == "POST":
+        ids = request.POST.getlist("task_ids")
+        if ids:
+            Task.objects.filter(pk__in=ids).delete()
+    return redirect("task_list")
